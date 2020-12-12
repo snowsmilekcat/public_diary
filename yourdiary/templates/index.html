@@ -1,10 +1,78 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>Top Page</title>
-</head>
-<body>
-    <h1>Hello World</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% load static %}
+　　{% block title %}
+　　　Webサービス上に誰か専用の日記ページを保存できるサービス| public diary
+　　{% endblock %}
+
+   {% block header %}
+  <header class="masthead text-center text-white" >
+    <div class="masthead-content">
+      <div class="container">
+        <h1 class="masthead-heading mb-0">public diary</h1>
+        <h2 class="masthead-subheading mb-0">誰か専用の日記保存</h2>
+        <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Learn More</a>
+      </div>
+    </div>
+    <div class="bg-circle-1 bg-circle"></div>
+    <div class="bg-circle-2 bg-circle"></div>
+    <div class="bg-circle-3 bg-circle"></div>
+    <div class="bg-circle-4 bg-circle"></div>
+  </header>
+   {% endblock %}
+
+   {% block contents %}
+　<section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2">
+          <div class="p-5">
+            <img class="img-fluid rounded-circle" src="{% static 'img/01.jpg' %}" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+          <div class="p-5">
+            <h2 class="display-4">Web Diary</h2>
+            <p>Web上で日記を書きまくろう！</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="p-5">
+            <img class="img-fluid rounded-circle" src="{% static 'img/02.jpg' %}" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="p-5">
+            <h2 class="display-4">Save Your Diary</h2>
+            <p>誰かの日記をまるごと保存！</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2">
+          <div class="p-5">
+            <img class="img-fluid rounded-circle" src="{% static 'img/03.jpg' %}" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+          <div class="p-5">
+            <h2 class="display-4">MemberShip System</h2>
+            <p>使えるのは会員だけなので安心！</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+   {% endblock %}
