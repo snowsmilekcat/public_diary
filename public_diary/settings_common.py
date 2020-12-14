@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'yourdiary.apps.YourdiaryConfig',
+    'accounts.apps.AccountsConfig',
+
+    # 認証機能を構築するための記載
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
 ]
 
 MIDDLEWARE = [
@@ -125,7 +131,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-#HTMLで参照し、結果メッセージのスタイルを結果ごとに分岐させる。
+# HTMLで参照し、結果メッセージのスタイルを結果ごとに分岐させる。
 MESSAGE_TAGS = {
     messages.ERROR: 'alert alert-danger',
     messages.WARNING: 'alert alert-warning',
@@ -134,3 +140,38 @@ MESSAGE_TAGS = {
 }
 
 
+# --------------------以下、認証機能に関する記載--------------------------------------
+# 以下の記載により、Djangoがデフォルトでユーザーモデルではなく、カスタムユーザーモデルを参照するようになる。
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# django-allauthで利用するdjango.contrib.sitesを使うためにサイト識別用IDを設定
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    # 一般ユーザー用(メールアドレス認証)
+    'allauth.account.auth_backends.AuthenticationBackend',
+    # 管理サイト用(ユーザー名認証)
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# メールアドレス認証に変更する設定
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+
+# サインアップにメールアドレス確認を挟むよう設定
+ACCOUNT_EMAIL_VERTIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+
+# ログイン・ログアウト後の遷移先を設定
+LOGIN_REDIRECT_URL = 'yourdiary:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+
+# ログアウトリンクのクリック一発でログアウトする設定
+ACCOUNT_LOGOUT_ON_GET = True
+
+# django-allauthが送信するメールの件名に自動付与される接頭辞をブランクにする設定
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+
+# デフォルトのメール送信元を設定
+DEFAULT_FROM_EMAIL = 'snowsmile_k_cat@yahoo.co.jp'
+# --------------------以上、認証機能に関する記載--------------------------------------
